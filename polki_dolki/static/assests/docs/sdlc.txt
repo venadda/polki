@@ -1,0 +1,123 @@
+Software life cycle management:
+    8 types of software Development Models
+        1. waterfall model
+            is a linear sequential flow, often used with projects that have a defined set of requirements.
+            Reflective of its name, the model’s process flows steadily downwards through the phases of
+            software implementation.
+            This model relies on the completion of the previous phase for the following to begin.
+            Because the model does not support going back to previously completed phases,
+            the Waterfall Model should be used with projects that do not anticipate unforeseen
+            changes mid-development.
+        2. V-Model
+            An extension of the Waterfall Model, the V-Model also functions as a sequential flow. However,
+             instead of only moving linearly downward, the software development lifecycle bends upwards
+             after the coding (for each of the testing phases).
+        3. Incremental Model
+            consists of iterative and incremental development stages. The Incremental Model is essentially
+            comprised of several mini Waterfall cycles.
+        4. RAD Model
+            Short for Rapid Application Development, the RAD Model is a modification of the Incremental Model.
+             When implementing this model, several components are developed simultaneously as if they were
+             smaller, individual projects. The different components are then assembled into working prototypes.
+        5. Agile Model
+            This model is rooted in process adaptability and user engagement with rapid delivery of functioning
+             software components. It has both Iterative and Incremental features, as it breaks the product
+             development into small incremental builds that are then provided in iterations.
+
+            The Agile Model relies on heavy collaboration between cross-functional teams and
+            the customer/user.
+
+        6. Iterative Model
+            The Iterative Model relies on specifying and implementing individual parts of the software,
+            rather than attempting to start with full specification requirements. Once a rough product
+            is created within an iteration, it is then reviewed and improved in the next iteration and
+            so on. The Iterative Model relies on the whole product being developed
+            step-by-step (Design/Develop, Test, Implement).
+        7. Spiral Model
+            The Spiral Model combines elements of both the Iterative and Waterfall development models,
+            in efforts to combine advantages of top-down and bottom-up production. The Spiral Model
+            has four phases – Identification, Design, Construct/Build, Evaluation and Risk Analysis.
+            The software project repeatedly passes through these phases in iterations called spirals.
+        8. Prototype model
+            The Prototype Model relies on creating prototypes of the software applications or system
+            software that are used to visualize various components of the software.
+            This model is used to limit the gap of misunderstanding of requirements by providing ample
+             collaboration and feedback with the user.
+
+Web servers:
+    Apache
+    IIS
+    Nginx :
+        light resource utilization and scalability.
+        handle many concurrent sessions due to its event-driven architecture.
+        it also used as proxy server and load balancer.
+    lighttpd->freeBSD operation system
+    Sun java System webserver
+    Novell's NetWare server, Google Web Server (GWS) and IBM's family of Domino servers.
+    Jigsaw
+
+WSGI middleware
+A WSGI middleware component is a Python callable that is itself a WSGI application, but may handle requests by delegating to other WSGI applications. These applications can themselves be WSGI middleware components.[7]
+
+A middleware component can perform such functions as:[7]
+
+Routing a request to different application objects based on the target URL, after changing the environment variables accordingly.
+Allowing multiple applications or frameworks to run side-by-side in the same process
+Load balancing and remote processing, by forwarding requests and responses over a network
+Performing content post-processing, such as applying XSLT stylesheets
+
+ASGI – The spiritual successor to WSGI, adding support for asynchronous applications
+Rack – Ruby web server interface
+PSGI – Perl Web Server Gateway Interface
+SCGI – Simple Common Gateway Interface
+JSGI – JavaScript web server gateway interface
+
+Green unicorn (gunicor)
+Architecture
+Server model [5]
+
+Central master process to manage the workers
+Requests are handled by worker processes
+Components:
+    Master
+    Sync workers
+    Async workers
+    Tornado workers
+    AsyncIO workers
+
+Server Model
+    Gunicorn is based on the pre-fork worker model. This means that there is a central master process that manages a
+    set of worker processes. The master never knows anything about individual clients.
+    All requests and responses are handled completely by worker processes.
+
+Master
+    The master process is a simple loop that listens for various process signals and reacts accordingly. It manages
+    the list of running workers by listening for signals like TTIN, TTOU, and CHLD. TTIN and TTOU tell the master to
+    increase or decrease the number of running workers. CHLD indicates that a child process has terminated,
+    in this case the master process automatically restarts the failed worker.
+
+Sync Workers
+    The most basic and the default worker type is a synchronous worker class that handles a single request at a time.
+    This model is the simplest to reason about as any errors will affect at most a single request. Though as we
+    describe below only processing a single request at a time requires some assumptions about how applications are programmed.
+
+    sync worker does not support persistent connections - each connection is closed after response has been sent (even if you
+    manually add Keep-Alive or Connection: keep-alive header in your application).
+
+Async Workers
+    The asynchronous workers available are based on Greenlets (via Eventlet and Gevent). Greenlets are an implementation of
+    cooperative multi-threading for Python. In general, an application should be able to make use of these worker classes with no changes.
+
+    For full greenlet support applications might need to be adapted. When using, e.g., Gevent and Psycopg it makes sense to ensure
+    psycogreen is installed and setup.
+
+    Other applications might not be compatible at all as they, e.g., rely on the original unpatched behavior.
+
+Async Workers
+You may also want to install Eventlet or Gevent if you expect that your application code may need to pause for extended periods of time during request processing. Check out the design docs for more information on when you’ll want to consider one of the alternate worker types.
+
+$ pip install greenlet            # Required for both
+$ pip install eventlet            # For eventlet workers
+$ pip install gunicorn[eventlet]  # Or, using extra
+$ pip install gevent              # For gevent workers
+$ pip install gunicorn[gevent]    # Or, using extra

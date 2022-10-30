@@ -1,0 +1,205 @@
+{% extends 'site.html' %}
+{% load static %}
+{%  block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-mg-12 col-sm-12 col-md-12 d-flex justify-content-center">
+
+
+            <img src="{% static 'images/polki-dolki1.png'%}" width="100%">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-mg-6 col-sm-6 col-md-6">
+            <img src="{% static 'images/polki_dolki2.png'%}" width="100%">
+        </div>
+        <div class="col-lg-6 col-mg-6 col-sm-6 col-md-6  border border-primary pt-5 pb-5 d-flex justify-content-center">
+            <h4>
+                Join the exploration of<br>
+                The beautiful space <br>
+                Where you can find <br>
+                the epitome of grace.<br><br>
+                Welcome to Polki-Dolki <br>
+                Your new shopping place <br>
+                To find what you need and<br>
+                Explore at your own pace.
+            </h4>
+
+        </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-lg-12 col-mg-12 col-sm-12 col-md-12 m-2 btn btn-primary rounded d-flex justify-content-center">
+            <h2 class="md-2">
+
+                About Us
+            </h2>
+
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-lg-12 col-mg-12 col-sm-12 col-md-12  border border-primary  d-flex justify-content-center">
+            <h4 class="pt-3 pb-3">
+
+                Polkidolki company has been formed in US & India - both for domestic
+                & international models.We are maximisers.><br><br>
+                We're out on our own journeys to maximise - be the
+                best at what we choose and care about the most <br>- whether it be
+                our impact, voice, potential, ideas,influence, well-being or more.<br>
+                Because when we maximise ourselves in our inclusive teams,<br><br>
+                Polki-Dolki is able to deliver the best imaginable value for our customers,
+                stakeholders and the planet!<br>
+                <br>
+                Thank you.<br>
+
+            </h4>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-mg-12 col-sm-12 col-md-12" style="background-color:#ffffff;">
+
+            <div class="pt-5 pb-3 d-flex justify-content-center">
+                <h4 style="color:#B22222;font-family:Georgia;text-align:center">
+                    Join the Journey</h4>
+
+            </div>
+        </div>
+    </div>
+<div class="row pt-5">
+             <div class='col-lg-6 col-mg-6 col-sm-12 col-md-6'>
+
+                 <div class="row col-12 bg-primary d-flex justify-content-center m-1 pb-3 pt-3">
+                    <h4 style="color: black;font-family:Georgia" >
+                    Looking to shop? <br>
+                    Subscribe for updates until we launch!
+                    </h4>
+                 </div>
+
+
+                 <div class="row col-12 d-flex justify-content-center">
+
+                    <div class=" pt-3 pb-3">
+                        <h5><b>Customer Registration form</b></h5>
+                    </div>
+
+                 </div>
+             <div class='row m-1'>
+
+                <div class="col-12 border border-primary d-flex justify-content-center  "
+                     style="background-color:#ffbe33">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group row pt-5">
+                            <label class="col-4 col-form-label text-nowrap " for="{{ customer.cust_firstname.cust_firstname_for_label }}" style="white-space:none"><b>First Name</b></label>
+                            {{ customer.cust_firstname.errors }}
+                            {{ customer.cust_firstname}}
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-nowrap " for="{{ form.cust_lastname.cust_lastname_for_label }}"><b>Last Name</b></label>
+                            {{ customer.cust_lastname.errors }}
+                            {{ customer.cust_lastname}}
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-nowrap" for="{{ customer.cust_email.cust_email_for_label }}"><b>Email Id</b></label>
+                            {{ customer.cust_email.errors }}
+                            {{ customer.cust_email}}
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-nowrap " for="{{ customer.cust_phone.cust_phone_for_label }}"><b>Ph Number</b></label>
+                            {{ customer.cust_phone.errors }}
+                            {{ customer.cust_phone}}
+                        </div>
+
+
+                        <div class="col-12 d-flex justify-content-center m-1 pt-3 pb-3">
+                            <button class="btn btn-primary rounded-pill" name="customer_submit" type="submit">Submit
+                            </button>
+                            <button class="btn btn-danger rounded-pill type=" reset
+                            ">Cancel</button>
+                        </div>
+
+                    </form>
+                </div>
+             </div>
+            </div>
+         <div class='col-lg-6 col-mg-6 col-sm-12 col-md-6  pb-3'>
+
+            <div class="row col-12  bg-primary m-1">
+                <div class="d-flex justify-content-center">
+                    <h4 class="m-4" style="color:black;font-family:Georgia"> Join the Journey
+                Have something to sell? <br>
+                Sign up to be a part of our experience.
+                </h4>
+                </div>
+            </div>
+                <div class=" row  pb-2 d-flex justify-content-center">
+                    <h4 class="pl-2"><b>Vendor Registration form</b></h4>
+                </div>
+                <div class="pt-5 row rounded border border-primary d-flex justify-content-center m-1"
+                     style="background-color:#ffbe33">
+                    {% if messages %}
+                         <div class="alert alert-dismissible alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>{{messages}}</strong>
+                        </div>
+                    {% endif %}
+                    <form method="post" id="form1">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="form-label text-nowrap" for="{{ vendor.first_name.first_name_for_label }}"><b>First Name</b></label>
+                            {{ vendor.firstname.errors }}
+                            {{ vendor.first_name}}
+                        </div>
+
+                         <div class="form-group">
+                            <label class="form-label text-nowrap" for="{{ vendor.last_name.last_name_for_label }}" style="color:black;">
+                                <b>Last Name</b></label>
+                            {{ vendor.lastname.errors }}
+                            {{ vendor.last_name}}
+                        </div>
+                        <div class="form-group">
+                            <label class="row-form-label text-nowrap" for="{{ vendor.last_name.last_name_for_label }}" style="color:black;">
+                                <b>Company Name</b></label>
+                            {{ vendor.company.errors }}
+                            {{ vendor.company}}
+                        </div>
+                        <div class="form-group">
+                             <label class="form-label text-nowrap" for="{{ vendor.email_id.email_id_for_label }}email" style="color:black;">
+                                <b>Email Id</b></label>
+
+                            {{ vendor.company_email.errors }}
+                            {{ vendor.company_email}}
+                        </div>
+                        <div class="form-group">
+                             <label class="form-label text-nowrap" for="{{ vendor.contact_no.contact_no_for_label }}" style="color:black;">
+                                <b>Ph Number</b></label>
+
+                            {{ vendor.contact_no.errors }}
+                            {{ vendor.company_phone}}
+                        </div>
+
+
+
+                        <div class="col-12 row d-flex content-justify-center pt-4 pb-5 m-1">
+                            <button class="rounded-pill btn btn-primary" name="vendor_submit" type="submit">Submit</button>
+                            <button class="rounded-pill btn btn-danger" type="reset">Cancel</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>
+
+    </div>
+    {% endblock %}
